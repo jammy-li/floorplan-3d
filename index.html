@@ -886,7 +886,7 @@ out+=h?'<line x1="'+start+'" y1="'+at+'" x2="'+end+'" y2="'+at+'" '+st+'/>':'<li
 for(const n of segs){const mid=pos+n/2;
 out+=h?'<line x1="'+pos+'" y1="'+(at-80)+'" x2="'+pos+'" y2="'+(at+80)+'" '+st+'/><text x="'+mid+'" y="'+(at-85)+'" text-anchor="middle" font-size="170" fill="#7d7160">'+n+'</text>':'<line x1="'+(at-80)+'" y1="'+pos+'" x2="'+(at+80)+'" y2="'+pos+'" '+st+'/><text x="'+(at-120)+'" y="'+mid+'" transform="rotate(-90 '+(at-120)+' '+mid+')" text-anchor="middle" font-size="170" fill="#7d7160">'+n+'</text>';
 pos+=n;}return out;};
-$('#gDims').innerHTML=chain(true,-620,0,[2887,3156,1572,2883])+chain(false,11550,0,[2794,2925,3651,1483])+chain(false,-650,1694,[1436,3651,1483])+'<text x="4600" y="11550" font-size="150" text-anchor="middle" fill="#7d7160">原图底侧：2887 / 1912 / 3118 / 1397（不同起止基线）</text>';
+$('#gDims').innerHTML=chain(true,-620,0,[2887,3156,1572,2883])+chain(false,11550,0,[2794,2925,3651,1483])+chain(false,-650,1694,[1781, 1694, 1436,3651,1483])+'<text x="4600" y="11550" font-size="150" text-anchor="middle" fill="#7d7160">原图底侧：2887 / 1912 / 3118 / 1397（不同起止基线）</text>';
 $('#gDims').setAttribute('display',ui.layers.dims?'inline':'none');
 }
 
