@@ -420,17 +420,17 @@ function applyStaticLang(){
 const WALLS = [
   // 【厨房】最西侧突出部分。厨房北窗被 WINS 单独建模，窗洞处不填 WALLS。
   // 对应原图厨房 4.9㎡；其边界坐标部分按轮廓比例拟合，不能直接倒推实际净宽。
-[-180,1694,0,3130,'b'],[-180,1694,800,1874,'e'],[1750,1694,2887,1874,'e'],
-[-180,3130,2260,3310,'b'],[2260,3130,2887,3310,'e'],
+[-180,1694,0,3388,'b'],[-180,1694,800,1874,'e'],[1750,1694,2887,1874,'e'],
+[-180,3388,2260,3568,'b'],[2260,3388,2887,3568,'e'],
   // 【厨房与公区之间】东侧墙的中段 n 为原图标红隔墙候选；门洞位于下端。
-[2707,1694,2887,2100,'e'],[2707,2100,2887,2620,'n'],[2707,2620,2887,2770,'e'],
+[2707,1694,2887,2100,'e'],[2707,2100,2887,2620,'n'],[2707,2620,2887,2688,'e'],
   // 【北侧餐厅】原户型的阶梯状北外墙，保留现状餐厅北窗（详见 WINS）。
 [2707,700,2887,1694,'b'],[2707,700,3660,880,'b'],[4580,700,6043,880,'e'],
   // 【卫生间】北侧凸起的湿区外轮廓及干湿分隔。
   // 北窗见 WINS；照片中干区洗衣机位于湿区外侧，不应画进淋浴区。
 [5863,0,6043,700,'b'],[5863,-180,6500,0,'b'],[7100,-180,7615,0,'e'],
-[5863,0,6043,1780,'e'],[6043,1600,6450,1780,'n'],[6450,1600,7615,1780,'e'],
-[7435,0,7615,1060,'e'],[7435,1060,7615,1780,'n'],
+[5863,0,6043,1780,'e'],[6043,1600,6650,1780,'n'],[7435,1600,7615,1780,'e'],
+[7435,0,7615,1780,'e'],
   // 【卫生间外干区】保留洗手盆/洗衣机的功能区；短墙端点根据平面图推定。
   // 洗烘叠放涉及实际净高、承重和散热，不能仅以本平面占位判断可安装。
 [5863,1780,6043,3030,'e'],[5863,3030,6300,3210,'n'],[7050,3030,7435,3210,'n'],
@@ -438,19 +438,19 @@ const WALLS = [
   // 东墙及与客厅间的隔墙均先保留，不为扩大房间而任意移动。
 [7615,-180,8160,0,'b'],[9250,-180,10498,0,'e'],
 [10318,0,10498,2794,'b'],[7615,2614,10498,2794,'e'],
-[7435,1780,7615,2070,'e'],[7435,2070,7615,2614,'e'],
+
   // 【东侧现客厅】外墙与东窗。该客厅不是单独的 28.2㎡，
   // 28.2㎡为原图统一标注的异形公共空间面积。
 [10318,2794,10498,4120,'e'],[10318,5320,10498,5719,'b'],
 [9161,5539,9620,5719,'e'],[10080,5539,10498,5719,'b'],
   // 【入户与玄关】西南侧入户门及现有鞋柜位置；实拍已确认玄关并非完全空白。
-[2707,3130,2887,3260,'b'],[2707,4150,2887,4566,'b'],
-[2707,4386,4799,4566,'b'],[4619,3780,4799,4566,'n'],
-[4799,4566,6043,4746,'e'],[5863,4566,6043,5719,'b'],
+[2707,3388,2887,3568,'b'],[2707,4458,2887,4824,'b'],
+[2707,4644,4799,4824,'b'],[4619,4038,4799,4644,'n'],
+[4799,4824,6043,5004,'e'],[5863,4824,6043,5719,'b'],
   // 【卧室 B｜南侧】11.4㎡；上侧墙有门洞，部分隔墙以红色可改标注为依据。
   // 注意卧室门前主通道、床位与衣柜开启净距，不能因客餐互换而侵占。
-[5863,5719,6043,9370,'b'],[5863,5539,6480,5719,'e'],
-[6480,5539,6920,5719,'e'],[6920,5539,9050,5719,'n'],
+[5863,5719,6043,9370,'b'],[5863,5539,6043,5719,'e'],
+[6793,5539,9050,5719,'n'],
 [9050,5539,9161,5719,'e'],[8981,5719,9161,9370,'b'],
   // 【卧室 B 与阳台】原有玻璃移门在两侧隔墙中间（见 SLIDES）。
   // 即使两端是可拆候选，也建议保留阳台冷热/噪声分隔，并先确认结构条件。
@@ -479,15 +479,15 @@ const WINS = [
 // 门洞坐标、门扇朝向部分按截图拟合：以后如复尺，应同时更新对应 WALLS 留空范围。
 const DOORS = [
   // 厨房独立平开门：保留阻隔油烟的能力
-{name:'厨房门',rect:[2707,2770,2887,3130],h:[2887,3130],c:[0,-1],o:[-1,0],len:700},
+{name:'厨房门',rect:[2707,2688,2887,3388],h:[2887,3388],c:[0,-1],o:[-1,0],len:700},
   // 西南入户：实拍有现成玄关柜，室内开门回转范围要避让换鞋凳
-{name:'入户门',rect:[2707,3260,2887,4150],h:[2887,4150],c:[0,-1],o:[1,0],len:890,entry:true},
+{name:'入户门',rect:[2707,3568,2887,4458],h:[2887,4458],c:[0,-1],o:[1,0],len:890,entry:true},
   // 卫生间湿区门：不要误将洗衣干区视为湿区内部
-{name:'卫生间门',rect:[6450,1600,7240,1780],h:[7240,1780],c:[-1,0],o:[0,1],len:790},
+{name:'卫生间门',rect:[6650,1600,7435,1780],h:[7435,1780],c:[-1,0],o:[0,1],len:785},
   // 东北次卧门：连接公共区域
 {name:'卧室A门',rect:[7435,1780,7615,2614],h:[7615,2614],c:[0,-1],o:[1,0],len:834},
   // 南侧主卧门：连接东侧公共区域
-{name:'卧室B门',rect:[6043,5719,6480,5899],h:[6043,5719],c:[1,0],o:[0,1],len:750}
+{name:'卧室B门',rect:[6043,5539,6793,5719],h:[6043,5719],c:[1,0],o:[0,1],len:750}
 ];
 // 推拉门：rect 同样表示洞口，v=false 表示沿 x 方向水平推拉。
 // 这里保留卧室 B 与阳台原有玻璃移门；其门框厚度/开启扇数需实测。
@@ -502,9 +502,9 @@ const R = (x0,y0,x1,y1) => [[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
 // 28.2㎡是原图公共区域总标注，不代表仅北餐厅或仅东客厅。
 const ROOMS = [
   // 【公共空间】北侧现餐厅 + 东侧现客厅为连续异形区域，预留客餐互换的可能性。
-{id:'public',name:'客餐厅',poly:[[2887,700],[6043,700],[6043,1780],[7615,1780],[7615,2794],[10498,2794],[10498,5719],[6043,5719],[6043,4566],[2887,4566]],mat:'tile800',at:[5400,3900],labelArea:'28.2'},
+{id:'public',name:'客餐厅',poly:[[2887,700],[6043,700],[6043,3030],[7435,3030],[7435,2794],[10498,2794],[10498,5719],[6043,5719],[6043,4824],[2887,4824]],mat:'tile800',at:[5400,3900],labelArea:'28.2'},
   // 【厨房】最西侧外凸，单独封闭、有北窗；下水与燃气原则上不动。
-{id:'kitchen',name:'厨房',poly:R(0,1694,2707,3130),mat:'tile600',at:[1370,2400],labelArea:'4.9'},
+{id:'kitchen',name:'厨房',poly:R(0,1694,2707,3388),mat:'tile600',at:[1370,2400],labelArea:'4.9'},
   // 【卫生间湿区】北侧外凸、有窗；当前仅有原图整体卫生间轮廓近似值。
 {id:'bath',name:'卫生间',poly:R(6043,0,7435,1780),mat:'antislip',at:[6710,890],labelArea:null},
   // 【干区洗衣】照片显示洗衣机置于洗手台旁；功能区与湿区并列，非第三个卫生间。
@@ -572,18 +572,18 @@ const F = (type,name,cx,cy,w,d,rot=0,color) => ({id:uid(),type,name,cx,cy,w,d,ro
  */
 function defaultFurniture(){ return [
   // 【厨房 · 现状参考】L 形台面、灶具、水槽和冰箱；不改变现有给排水/烟道。
-F('counter','橱柜台面',1250,1880,2100,550),
+F('counter','橱柜台面',1250,2140,2100,550),
 F('counter','橱柜台面',500,2650,1200,550,90),
-F('ksink','水槽',1550,1880,700,450),
+F('ksink','水槽',1550,2140,700,450),
 F('stove','燃气灶',500,2480,700,450,90),
-F('fridge','冰箱',2420,2390,600,650,90),
+F('fridge','冰箱',2360,2390,600,650,90),
   // 【北侧餐厅 · 方案 A】与西侧厨房靠近，保留餐厨短动线。
 F('table','餐桌',4200,1920,1300,750,90),
 F('chair','餐椅',3580,1920,430,430),
 F('chair','餐椅',4820,1920,430,430),
   // 【餐边柜 + 水吧台 · 新需求】默认按无上下水咖啡/茶饮台布置；
   // 如要设置独立水槽、净水器或制冰机，必须先论证给排水和防水，不得默认已有。
-F('cabinet','餐边柜 · 水吧',5550,1150,900,400,90),
+F('cabinet','餐边柜 · 水吧',5550,1335,900,400,90),
   // 【东侧客厅 · 方案 A】控制沙发尺度，给东北卧室及南侧主卧保留通路。
 F('sofa','双人沙发',8700,3700,1750,830,90),
 F('coffeetable','茶几',8960,4520,850,500),
@@ -594,7 +594,7 @@ F('rug','地毯',8860,4540,2100,1450),
   // 【玄关】实拍已存在大鞋柜，不应误判“没有玄关”而重复增加柜体。
 F('shoecab','现有玄关鞋柜',3750,4390,1300,350),
   // 【卫生间 · 干湿分离】原位洗手台 + 洗衣机，洗澡/坐便功能留在北侧湿区。
-F('vanity','干区洗手台',6240,2200,850,500,90),
+F('vanity','干区洗手台',6320,2200,850,500,90),
   // 【洗烘叠放 · 新需求】2D 只有一个 600×650 占地占位，表示上下叠放，
   // 不是两台机器并排。优先评估热泵烘干机（通常无专用对外排风管），
   // 仍需检查叠放组件、净高、检修距离、散热、供电与排水。
@@ -605,11 +605,11 @@ F('shower','淋浴房',6510,500,800,800),
 F('toilet','马桶',6900,1290,400,670,180),
   // 【卧室 A】次卧单人床与衣柜：请按实测尺寸校正，勿堵北窗。
 F('bed','单人床',8920,1180,1200,1900,90),
-F('wardrobe','衣柜',9970,2110,1100,550,90),
+F('wardrobe','衣柜',9970,2050,1100,550,90),
   // 【卧室 B】主卧床+衣柜；阳台玻璃移门及开门通道保持畅通。
 F('bed','双人床 1.5m',7470,7720,1500,1950,90),
 F('wardrobe','衣柜',7700,6120,1800,550),
-F('nightstand','床头柜',6460,7650,400,400),
+F('nightstand','床头柜',6290,7650,400,400),
   // 【阳台】轻量化休闲/书桌占位；不表示允许改外立面或移排水。
 F('desk','小书桌',6500,10050,800,450,90),
 F('plant','绿植',8550,10200,450,450)
@@ -623,7 +623,7 @@ function defaultState(){
 
 // 存档单独命名，避免旧“3室2卫”示例数据从 localStorage 恢复后覆盖真实户型家具。
 // 仅改注释不用更改此 key；若以后变更墙体数组顺序，需考虑 demolished 的旧 wN 索引兼容。
-const STORE = 'huxing-design-84sqm-v1';
+const STORE = 'huxing-design-84sqm-v2';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -860,8 +860,8 @@ function renderOpenings(){
     else { const L = x1-x0, m = (y0+y1)/2; s += `<rect x="${x0}" y="${m-45}" width="${L*.55}" height="40" fill="#fff" ${DS}/><rect x="${x1-L*.55}" y="${m+5}" width="${L*.55}" height="40" fill="#fff" ${DS}/>`; }
   });
   // 入户标识
-  s += `<path d="M1500 3650H2520M2330 3500L2600 3650L2330 3800" fill="none" stroke="#b5653a" stroke-width="2" vector-effect="non-scaling-stroke"/>
-        <text x="1580" y="3430" font-size="200" fill="#b5653a">${tr('入户','Entry')}</text>`;
+  s += `<path d="M1450 3920H2520M2330 3770L2600 3920L2330 4070" fill="none" stroke="#b5653a" stroke-width="2" vector-effect="non-scaling-stroke"/>
+        <text x="1580" y="3700" font-size="200" fill="#b5653a">${tr('入户','Entry')}</text>`;
   $('#gOpen').innerHTML = s;
 }
 
@@ -965,7 +965,7 @@ function overviewPanel(){
   const rows = ROOMS.map(r => {
     const st = state.rooms[r.id];
     return `<tr class="click" data-room="${r.id}"><td><span class="sw" style="background:${MATS[st.mat].sw}"></span>${esc(nm(st.name))}${r.counted===false?' <span class="muted">*</span>':''}</td>
-      <td class="r">${fmt(area(r.poly))} m²</td></tr>`;
+      <td class="r">${r.labelArea === null ? '—' : ((r.labelArea ?? fmt(area(r.poly))) + ' m²')}</td></tr>`;
   }).join('');
   const tot = ROOMS.filter(r => r.counted !== false).reduce((a,r) => a + area(r.poly), 0);
   const byMat = {};
@@ -978,8 +978,8 @@ function overviewPanel(){
   return `
   <section><h3>${tr('房间面积','Room Areas')} <small>${tr('点击查看 / 更换地面','Click to view / change flooring')}</small></h3>
     <table>${rows}</table>
-    <div class="total"><span>${tr('套内使用面积','Net floor area')}</span><b>${fmt(tot)} m²</b></div>
-    <div class="muted" style="font-size:11px;margin-top:4px">${tr('* 飘窗不计入使用面积；面积按墙体内净尺寸计算','* Bay windows are excluded; areas use net inner wall dimensions')}</div></section>
+    <div class="total"><span>${tr('VR标注建筑面积','Gross area on listing')}</span><b>约 84 m²</b></div>
+    <div class="muted" style="font-size:11px;margin-top:4px">${tr('* 优先显示原图标注面积；无标注的不展示。模型尚未现场复尺，材料估算仅供参考','* Labels follow the supplied drawing. Unmeasured areas are hidden; flooring estimates are preliminary.')}</div></section>
   <section><h3>${tr('地面材料估算','Flooring Estimate')} <small>${tr('含 5% 损耗','incl. 5% waste')}</small></h3>
     <table>${matRows}</table>
     <div class="total"><span>${tr('地面材料合计','Flooring total')}</span><b>¥${Math.round(cost).toLocaleString()}</b></div></section>
@@ -1078,11 +1078,11 @@ function roomPanel(r){
   return `<section><h3>${tr('房间','Room')}</h3>
     <div class="form"><label class="full">${tr('名称','Name')}<input id="rName" value="${esc(nm(st.name))}"></label></div>
     <div class="stats" style="margin-top:10px">
-      <div><small>${tr('使用面积','Floor area')}</small><span class="big">${fmt(a)}</span> m²</div>
+      <div><small>${tr('模型面积（未复尺）','Model area (not surveyed)')}</small><span class="big">${fmt(a)}</span> m²</div>
       <div><small>${tr('周长','Perimeter')}</small><span class="big">${fmt(perim(r.poly),1)}</span> m</div>
-      <div><small>${tr('开间','Width')}</small><span class="big">${x1-x0}</span> mm</div>
-      <div><small>${tr('进深','Depth')}</small><span class="big">${y1-y0}</span> mm</div></div>
-    <div class="muted">${tr(`墙面面积（层高 2.8m，未扣门窗）约 ${fmt(perim(r.poly)*2.8,1)} m²`, `Wall area (2.8m ceiling, openings not deducted) ≈ ${fmt(perim(r.poly)*2.8,1)} m²`)}</div></section>
+      <div><small>${tr('模型框选宽','Model bbox width')}</small><span class="big">${x1-x0}</span> mm</div>
+      <div><small>${tr('模型框选深','Model bbox depth')}</small><span class="big">${y1-y0}</span> mm</div></div>
+    <div class="muted">${tr(`墙面面积示意（假定层高 2.8m，未扣门窗）约 ${fmt(perim(r.poly)*2.8,1)} m²`, `Wall area (2.8m ceiling, openings not deducted) ≈ ${fmt(perim(r.poly)*2.8,1)} m²`)}</div></section>
   <section><h3>${tr('地面材料','Flooring')}</h3><div class="mats">${mats}</div>
     <div class="total"><span>${tr('材料估价','Estimated cost')}</span><b>¥${Math.round(a*MATS[st.mat].price*1.05).toLocaleString()}</b></div></section>
   <section><h3>${tr('房间内家具','Furniture in room')} <small>${tr(`${inside.length} 件`, `${inside.length} items`)}</small></h3>
@@ -1166,8 +1166,7 @@ function addItem(it, x, y){
 // 'b' 和 'e' 是软件层面的保护类型；可改墙的工程安全性仍需现场核查。
 function toggleWall(id){
   const w = WALLS[+id.slice(1)];
-  if (w[4]==='b') return toast(tr('承重墙（黑色）不可拆除', 'Load-bearing walls (black) cannot be removed'));
-  if (w[4]==='e') return toast(tr('外墙属于建筑外围护结构，不建议拆除', 'Exterior walls are part of the building envelope and should not be removed'));
+  if (w[4]!=='n') return toast(tr('该墙不在用户标红的候选拆改范围内，不允许在本方案中删除', 'Wall outside the user-marked candidate set is protected'));
   const on = state.demolished.includes(id);
   mutate(() => state.demolished = on ? state.demolished.filter(x => x!==id) : [...state.demolished, id]);
   toast(on ? tr('已恢复墙体', 'Wall restored') : tr(`已标记拆除 ${Math.max(w[2]-w[0], w[3]-w[1])} mm 墙体`, `Marked ${Math.max(w[2]-w[0], w[3]-w[1])} mm of wall for removal`));
@@ -1184,7 +1183,7 @@ function syncModeHint(){
   const hints = {select:'',
     measure:COARSE ? tr('按住拖出测量线，或依次点两点 · 靠近墙面自动吸附 · 点「选择」退出', 'Hold and drag a line, or tap two points · snaps to walls · tap "Select" to exit')
       : tr('点击两点（或按住拖动）测量距离 · 靠近墙面自动吸附 · Shift 锁定水平/垂直 · Esc 取消', 'Click two points (or drag) to measure · snaps to walls · Shift locks horizontal/vertical · Esc cancels'),
-    demolish:tr('点击灰色非承重墙标记拆除，再次点击恢复 · 黑色承重墙不可拆', 'Click a grey non-bearing wall to remove it, click again to restore · black bearing walls cannot be removed')};
+    demolish:tr('仅可拆改标红的候选隔墙，实际施工需复核；其他墙保留', 'Only user-marked candidate partitions are editable after on-site verification')};
   const h = $('#modehint'); h.textContent = hints[ui.tool]; h.classList.toggle('show', !!hints[ui.tool]);
 }
 
@@ -2449,7 +2448,7 @@ function buildLabels(){
   });
   const counted = ROOMS.filter(r => r.counted !== false);
   $('#roomList').innerHTML = counted.map(r => `<button data-room="${r.id}"><span>${esc(nm(state.rooms[r.id].name))}</span><small>${r.labelArea === null ? '' : (r.labelArea ?? area(r.poly).toFixed(2)) + ' m²'}</small></button>`).join('')
-    + `<button data-room="__all"><span>${tr('全屋', 'Whole home')}</span><small>${counted.reduce((a, r) => a + area(r.poly), 0).toFixed(2)} m²</small></button>`;
+    + `<button data-room="__all"><span>${tr('全屋', 'Whole home')}</span><small>约84 m²（建筑）</small></button>`;
   document.querySelectorAll('#roomList button').forEach(b => b.onclick = () => {
     document.querySelectorAll('#roomList button').forEach(x => x.classList.toggle('on', x === b));
     if (opt.mode === 'walk') setMode('orbit');
