@@ -1,0 +1,31 @@
+name: Floorplan geometry checks
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'scripts/check-floorplan.mjs'
+      - '.github/workflows/floorplan-check.yml'
+  push:
+    branches:
+      - 'feat/real-84sqm-floorplan'
+    paths:
+      - 'index.html'
+      - 'scripts/check-floorplan.mjs'
+      - '.github/workflows/floorplan-check.yml'
+
+jobs:
+  geometry:
+    name: JS syntax and geometry invariants
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check floorplan data
+        run: node scripts/check-floorplan.mjs
