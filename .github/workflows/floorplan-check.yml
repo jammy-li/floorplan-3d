@@ -1,0 +1,63 @@
+name: Floorplan geometry checks
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'scripts/check-floorplan.mjs'
+      - 'scripts/browser-smoke.mjs'
+      - '.github/workflows/floorplan-check.yml'
+  push:
+    branches:
+      - 'feat/real-84sqm-floorplan'
+    paths:
+      - 'index.html'
+      - 'scripts/check-floorplan.mjs'
+      - 'scripts/browser-smoke.mjs'
+      - '.github/workflows/floorplan-check.yml'
+
+jobs:
+  geometry:
+    name: JS syntax and geometry invariants
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check floorplan data
+        run: node scripts/check-floorplan.mjs
+
+  browser:
+    name: Browser 2D / 3D smoke
+    needs: geometry
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright browser
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Render 2D and 3D
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/floorplan-http.log 2>&1 &
+          node scripts/browser-smoke.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: floorplan-2d-3d
+          path: screenshots/
+          if-no-files-found: ignore
